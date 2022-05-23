@@ -1,7 +1,7 @@
 # TripTracker
 
 ## POC status done 
-Note : uses in memeory collection
+Note : uses in memory collection
 
 ## How To Run
 1.  Using visual studio 
