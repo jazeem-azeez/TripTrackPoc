@@ -5,7 +5,7 @@ Note : uses in memory collection
 
 ## How To Run
 1.  Using visual studio 
-2.  User Docker
+2.  Use Docker
 
 
 ## How To Test
