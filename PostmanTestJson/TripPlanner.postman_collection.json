@@ -1,0 +1,330 @@
+{
+	"info": {
+		"_postman_id": "c2b14215-9822-48b4-911d-41ef19c89f65",
+		"name": "TripPlanner",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateDriver",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var id = pm.response.json().data.id; \r",
+							"pm.globals.set(\"driverId\", id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n  \"data\": {\r\n    \"name\": \"Abu\", \r\n    \"dob\": \"1922-05-23T00:36:57.243Z\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7178/drivers",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7178",
+					"path": [
+						"drivers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateTruck",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var id = pm.response.json().data.id; \r",
+							"pm.globals.set(\"truckId\", id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correlationId\": \"string\",\r\n    \"errorMessage\": \"string\",\r\n    \"statusCode\": \"string\",\r\n    \"count\": \"string\",\r\n    \"data\": { \r\n        \"name\": \"hudibaba\",\r\n        \"number\": \"1234\",\r\n        \"lastkKnownLocation\": \"55.67291913499782, 12.564951273933206\",\r\n        \"currentDriverId\": \"{{driverId}}\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7178/trucks",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7178",
+					"path": [
+						"trucks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateTrip",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var id = pm.response.json().data.id; \r",
+							"pm.globals.set(\"tripPlanId\", id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"correlationId\": \"string\",\r\n  \"errorMessage\": \"string\",\r\n  \"statusCode\": \"string\",\r\n  \"count\": \"string\",\r\n  \"data\": {\r\n    \"driverId\": \"{{driverId}}\", \r\n    \"name\": \"DE trip 01\",\r\n    \"truckId\": \"{{truckId}}\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7178/tripPlans",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7178",
+					"path": [
+						"tripPlans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateTruckLocationForStart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n  \"data\": {\r\n    \"truckId\": \"{{truckId}}\",\r\n    \"tripPlanId\": \"{{tripPlanId}}\",\r\n    \"gpsLocationString\": \"55.67291913499782, 12.564951273933206\",\r\n    \"statusMessage\": \"started\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7178/trucks/{{truckId}}/gps",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7178",
+					"path": [
+						"trucks",
+						"{{truckId}}",
+						"gps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateTruckLocationForEnd",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n  \"data\": {\r\n    \"truckId\": \"{{truckId}}\",\r\n    \"tripPlanId\": \"{{tripPlanId}}\",\r\n    \"gpsLocationString\": \"55.675266529345116, 12.56744036383077\",\r\n    \"statusMessage\": \"completed\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7178/trucks/{{truckId}}/gps",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7178",
+					"path": [
+						"trucks",
+						"{{truckId}}",
+						"gps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ReportsTRipPlan:GetDistanceForASinglePlan",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7178/tripPlans/reports/getDistanceDrivenForTripPlan?triplPlanId={{tripPlanId}}",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7178",
+					"path": [
+						"tripPlans",
+						"reports",
+						"getDistanceDrivenForTripPlan"
+					],
+					"query": [
+						{
+							"key": "triplPlanId",
+							"value": "{{tripPlanId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ReportsTRipPlan:GetDistanceOverPeriod",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7178/TripPlans/reports/getKMByAgeAndCountryOverAPeriod?age=50&countryCode=DK&lowerTimeStamp=2022-03-03&upperTimeStamp=2022-06-06",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7178",
+					"path": [
+						"TripPlans",
+						"reports",
+						"getKMByAgeAndCountryOverAPeriod"
+					],
+					"query": [
+						{
+							"key": "age",
+							"value": "50"
+						},
+						{
+							"key": "countryCode",
+							"value": "DK"
+						},
+						{
+							"key": "lowerTimeStamp",
+							"value": "2022-03-03"
+						},
+						{
+							"key": "upperTimeStamp",
+							"value": "2022-06-06"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ReportsTRipPlan:GetDistanceOverPeriodFromLogs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7178/TripPlans/reports/getKMByAgeAndCountryOverAPeriod?age=50&countryCode=DK&lowerTimeStamp=2022-03-03&upperTimeStamp=2022-06-06",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7178",
+					"path": [
+						"TripPlans",
+						"reports",
+						"getKMByAgeAndCountryOverAPeriod"
+					],
+					"query": [
+						{
+							"key": "age",
+							"value": "50"
+						},
+						{
+							"key": "countryCode",
+							"value": "DK"
+						},
+						{
+							"key": "lowerTimeStamp",
+							"value": "2022-03-03"
+						},
+						{
+							"key": "upperTimeStamp",
+							"value": "2022-06-06"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
